@@ -1,13 +1,13 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as mat;
-import 'package:get_server/get_server.dart' as serv;
-import './server.dart';
+import 'package:get_server/get_server.dart' as get_server;
+import './endpoints/home.dart';
 
 void main() {
   // serv.runApp(serv.GetServer(home: SocketPage()));
   mat.runApp(MyApp());
-  serv.runIsolate(initServer);
+  get_server.runIsolate(initServer);
   // initServer();
   doWhenWindowReady(() {
     final win = appWindow;
@@ -21,11 +21,16 @@ void main() {
 }
 
 void initServer(_) {
-  serv.runApp(
-    serv.GetServerApp(
-      home: SocketPage(),
-    ),
-  );
+  // get_server.runApp(
+  //   get_server.GetServerApp(
+  //     home: SocketPage(),
+  //   ),
+  // );
+
+  get_server.runApp(get_server.GetServer(getPages: [
+    // get_server.GetPage(name: '/', page: () => HomePage(), method: get_server.Method.ws),
+    get_server.GetPage(name: '/user', page: () => HomePage()),
+  ]));
 }
 
 const borderColor = Color(0xFF805306);
