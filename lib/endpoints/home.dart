@@ -1,7 +1,8 @@
-// import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' as dart;
+// import 'dart:html';
+
 import 'package:get_server/get_server.dart' as serv;
-import 'dart:convert';
+
+List sockets = [];
 
 class HomePage extends serv.GetView {
   @override
@@ -10,28 +11,18 @@ class HomePage extends serv.GetView {
 
     if (context.method.toString() == 'Method.post') {
       print(context.request.query);
-      print(context.param('name'));
       print(context.request.input.headers);
       print(context.request.input.response);
-      print('string?? ${context.request.input.toString()}');
-      print(context.response);
-      print(context.obs);
-      // print(context.payload().toString());
-      // print(context.payload);
       context.payload().then((value) => print(value));
-      // print('body: $body');
-
-      // var thing = context.payload();
-      // print(thing);
-      // print(thing.);
-      // print(context.payload());
-      // var Stream<List<int>> thing = context.request.query
-      // var content = utf8.decodeStream(context.payload().asStream());
-
+      sockets.forEach((ws) {
+        ws.send('Hey sockets this is a broadcast');
+      });
       return serv.Text('Yo Hey whats up http');
     }
     return serv.Socket(builder: (socket) {
+      print('Socket:: $socket');
       socket.onOpen((ws) {
+        sockets.add(ws.rawSocket);
         ws.send('socket ${ws.id} connected');
       });
 

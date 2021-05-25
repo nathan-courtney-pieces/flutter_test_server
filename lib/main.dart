@@ -1,14 +1,13 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' as mat;
+import 'package:flutter/material.dart' as mat_dart;
+import 'package:flutter_test_server/endpoints/user.dart';
 import 'package:get_server/get_server.dart' as get_server;
 import './endpoints/home.dart';
 
 void main() {
-  // serv.runApp(serv.GetServer(home: SocketPage()));
-  mat.runApp(MyApp());
+  mat_dart.runApp(MyApp());
   get_server.runIsolate(initServer);
-  // initServer();
   doWhenWindowReady(() {
     final win = appWindow;
     final initialSize = Size(600, 450);
@@ -21,26 +20,20 @@ void main() {
 }
 
 void initServer(_) {
-  // get_server.runApp(
-  //   get_server.GetServerApp(
-  //     home: SocketPage(),
-  //   ),
-  // );
-
   get_server.runApp(get_server.GetServer(getPages: [
-    // get_server.GetPage(name: '/', page: () => HomePage(), method: get_server.Method.ws),
-    get_server.GetPage(name: '/user', page: () => HomePage()),
+    get_server.GetPage(name: '/', page: () => HomePage()),
+    get_server.GetPage(name: '/user', page: () => UserPage()),
   ]));
 }
 
 const borderColor = Color(0xFF805306);
 
-class MyApp extends mat.StatelessWidget {
+class MyApp extends mat_dart.StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return mat.MaterialApp(
+    return mat_dart.MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: mat.Scaffold(
+        home: mat_dart.Scaffold(
             body: WindowBorder(
                 color: borderColor,
                 width: 1,
@@ -72,24 +65,24 @@ class RightSide extends StatelessWidget {
               SizedBox(height: 120),
               SizedBox(
                   width: 400,
-                  child: mat.TextFormField(
-                    cursorColor: mat.Theme.of(context).cursorColor,
+                  child: mat_dart.TextFormField(
+                    cursorColor: mat_dart.Theme.of(context).cursorColor,
                     initialValue: '',
                     maxLength: 200,
-                    decoration: mat.InputDecoration(
-                      icon: Icon(mat.Icons.alternate_email),
+                    decoration: mat_dart.InputDecoration(
+                      icon: Icon(mat_dart.Icons.alternate_email),
                       labelText: '',
                       labelStyle: TextStyle(
                         color: Color(0xFF6200EE),
                       ),
                       helperText: 'Enter Email',
-                      enabledBorder: mat.UnderlineInputBorder(
+                      enabledBorder: mat_dart.UnderlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFF6200EE)),
                       ),
                     ),
                   )),
-              mat.TextButton(
-                  style: mat.ButtonStyle(alignment: Alignment.bottomCenter),
+              mat_dart.TextButton(
+                  style: mat_dart.ButtonStyle(alignment: Alignment.bottomCenter),
                   onPressed: () {
                     appWindow.hide();
                   },
@@ -109,7 +102,7 @@ final closeButtonColors = WindowButtonColors(
     mouseOver: Color(0xFFD32F2F),
     mouseDown: Color(0xFFB71C1C),
     iconNormal: Color(0xFF805306),
-    iconMouseOver: mat.Colors.white);
+    iconMouseOver: mat_dart.Colors.white);
 
 class WindowButtons extends StatelessWidget {
   @override
