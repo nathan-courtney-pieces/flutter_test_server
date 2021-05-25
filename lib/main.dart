@@ -30,7 +30,7 @@ void initServer(_) {
   // );
 
   get_server.runApp(get_server.GetServer(getPages: [
-    get_server.GetPage(name: '/', page: () => HomePage()),
+    get_server.GetPage(name: '/', page: () => HomePage(), method: get_server.Method.ws),
     get_server.GetPage(name: '/user', page: () => UserPage()),
   ]));
 }
