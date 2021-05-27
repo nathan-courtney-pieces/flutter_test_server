@@ -12,10 +12,10 @@ class UserPage extends serv.GetView {
       print(context.request.input.response);
       context.payload().then((value) => print(value));
       print(' length:: ${globals.sockets.length}');
-      // globals.sockets.forEach((ws) {
-      //   print('ws ?? ${ws.id}');
-      //   ws.send('Hey sockets this is a broadcast');
-      // });
+      globals.sockets.forEach((ws) {
+        print('ws ?? ${ws.id}');
+        ws.send('Hey sockets this is a broadcast');
+      });
       return serv.Text('Yo Hey whats up http');
     }
     return serv.Socket(builder: (socket) {

@@ -4,10 +4,19 @@ import 'package:flutter/material.dart' as mat_dart;
 import 'package:flutter_test_server/endpoints/user.dart';
 import 'package:get_server/get_server.dart' as get_server;
 import './endpoints/home.dart';
+import 'dart:io';
 
 void main() {
   mat_dart.runApp(MyApp());
-  get_server.runIsolate(initServer);
+  try {
+    // get_server.runIsolate(initServer);
+    initServer(1);
+    // get_server.runApp(initServer(1));
+  } on SocketException catch (_) {
+    print('ERROR CONNECTION');
+  } catch (_) {
+    print('NOT FOUND NOT FOUND');
+  }
   doWhenWindowReady(() {
     final win = appWindow;
     final initialSize = Size(600, 450);
@@ -19,11 +28,35 @@ void main() {
   });
 }
 
-void initServer(_) {
-  get_server.runApp(get_server.GetServer(getPages: [
-    get_server.GetPage(name: '/', page: () => HomePage()),
-    get_server.GetPage(name: '/user', page: () => UserPage()),
-  ]));
+initServer(_) async {
+  final HOST = InternetAddress.anyIPv4;
+  // final PORT = InternetAddress.anyIPv4
+  final address = 'pieces';
+  final host = InternetAddress(InternetAddress.anyIPv4.toString(),
+      type: InternetAddressType.unix);
+
+  try {
+    get_server.GetServer getServer = get_server.GetServer(
+        port: 47809,
+        getPages: [
+          get_server.GetPage(name: '/', page: () => HomePage()),
+          get_server.GetPage(name: '/user', page: () => UserPage()),
+        ],
+        onNotFound: get_server.Error(error: 'NOT FOUND'));
+
+    print('getServer $getServer}');
+    getServer.controller.obs.listen((onError) {print('hello?');});
+    // thing.controller.onNotFound = Widget();
+    print(getServer.controller.onNotFound);
+  } on SocketException catch (_) {
+    print('ERROR CONNECTION');
+  } catch (_) {
+    print('NOT FOUND NOT FOUND');
+  }
+  // get_server.runApp(get_server.GetServer(port: 47809, getPages: [
+  //   get_server.GetPage(name: '/', page: () => HomePage()),
+  //   get_server.GetPage(name: '/user', page: () => UserPage()),
+  // ]));
 }
 
 const borderColor = Color(0xFF805306);
@@ -59,14 +92,16 @@ class RightSide extends StatelessWidget {
             child: Column(children: [
               WindowTitleBarBox(
                   child: Row(children: [
-                Expanded(child: MoveWindow()),
-                WindowButtons()
-              ])),
+                    Expanded(child: MoveWindow()),
+                    WindowButtons()
+                  ])),
               SizedBox(height: 120),
               SizedBox(
                   width: 400,
                   child: mat_dart.TextFormField(
-                    cursorColor: mat_dart.Theme.of(context).cursorColor,
+                    cursorColor: mat_dart.Theme
+                        .of(context)
+                        .cursorColor,
                     initialValue: '',
                     maxLength: 200,
                     decoration: mat_dart.InputDecoration(
@@ -82,7 +117,8 @@ class RightSide extends StatelessWidget {
                     ),
                   )),
               mat_dart.TextButton(
-                  style: mat_dart.ButtonStyle(alignment: Alignment.bottomCenter),
+                  style:
+                  mat_dart.ButtonStyle(alignment: Alignment.bottomCenter),
                   onPressed: () {
                     appWindow.hide();
                   },

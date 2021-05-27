@@ -1,39 +1,8 @@
-// import 'dart:html';
-
 import 'package:get_server/get_server.dart' as serv;
-
-List sockets = [];
 
 class HomePage extends serv.GetView {
   @override
   serv.Widget build(serv.BuildContext context) {
-    print('context: ${context.method.toString()}');
-
-    if (context.method.toString() == 'Method.post') {
-      print(context.request.query);
-      print(context.request.input.headers);
-      print(context.request.input.response);
-      context.payload().then((value) => print(value));
-      sockets.forEach((ws) {
-        ws.send('Hey sockets this is a broadcast');
-      });
-      return serv.Text('Yo Hey whats up http');
-    }
-    return serv.Socket(builder: (socket) {
-      print('Socket:: $socket');
-      socket.onOpen((ws) {
-        sockets.add(ws.rawSocket);
-        ws.send('socket ${ws.id} connected');
-      });
-
-      socket.onMessage((data) {
-        print('data: $data');
-        // socket.send(data);
-      });
-
-      // socket.onClose((close) {
-      //   print('socket has closed. Reason: ${close.message}');
-      // });
-    });
+    return serv.Text('Hello this is the Home Page');
   }
 }
