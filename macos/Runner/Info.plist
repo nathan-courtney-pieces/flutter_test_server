@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SUFeedURL</key>
+	<string>https://storage.googleapis.com/pieces-desktop-releases/flutter/appcast.xml</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -27,7 +29,9 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>LSUIElement</key>
-	<true/>
+	<false/>
+	<key>SUPublicEDKey</key>
+	<string>6G0GK6Js1ZIF/WDI9bfVCEog7jjR5Pg5qVY+l820pfU=</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
