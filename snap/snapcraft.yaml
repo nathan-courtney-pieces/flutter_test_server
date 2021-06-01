@@ -1,0 +1,28 @@
+name: flutter-test-server
+version: 0.1.0
+summary: Flutter Test Server
+description: Testing Snapcraft
+
+confinement: devmode
+base: core18
+grade: devel
+
+slots:
+  dbus-flutter-test-server: # adjust accordingly to your app name
+    interface: dbus
+    bus: session
+    name: org.bar.flutter_test_server # adjust accordingly to your app name and
+
+apps:
+  flutter-test-server:
+    command: flutter_test_server
+    extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+      - network
+    slots:
+      - dbus-flutter-test-server
+parts:
+  flutter-test-server:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application

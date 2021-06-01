@@ -1,0 +1,8 @@
+  [Desktop Entry]
+  Name=Flutter Test Server
+  Comment=Testing Flutter Snapcraft
+  Exec=flutter-test-server
+  Icon=${SNAP}/meta/gui/flutter-test-server.png
+  Terminal=true
+  Type=Application
+  Categories=Productivity;

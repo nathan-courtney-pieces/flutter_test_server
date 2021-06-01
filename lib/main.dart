@@ -1,4 +1,4 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+// import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as mat_dart;
 import 'package:flutter_test_server/endpoints/user.dart';
@@ -7,7 +7,7 @@ import './endpoints/home.dart';
 import 'dart:io';
 
 void main() {
-  mat_dart.runApp(MyApp());
+  // mat_dart.runApp(MyApp());
   try {
     // get_server.runIsolate(initServer);
     initServer(1);
@@ -17,15 +17,15 @@ void main() {
   } catch (_) {
     print('NOT FOUND NOT FOUND');
   }
-  doWhenWindowReady(() {
-    final win = appWindow;
-    final initialSize = Size(600, 450);
-    win.minSize = initialSize;
-    win.size = initialSize;
-    win.alignment = Alignment.center;
-    win.title = "Custom window with Flutter";
-    win.show();
-  });
+  // doWhenWindowReady(() {
+  //   final win = appWindow;
+  //   final initialSize = Size(600, 450);
+  //   win.minSize = initialSize;
+  //   win.size = initialSize;
+  //   win.alignment = Alignment.center;
+  //   win.title = "Custom window with Flutter";
+  //   win.show();
+  // });
 }
 
 initServer(_) async {
@@ -67,10 +67,11 @@ class MyApp extends mat_dart.StatelessWidget {
     return mat_dart.MaterialApp(
         debugShowCheckedModeBanner: false,
         home: mat_dart.Scaffold(
-            body: WindowBorder(
-                color: borderColor,
-                width: 1,
-                child: Row(children: [RightSide()]))));
+            // body: WindowBorder(
+            //     color: borderColor,
+            //     width: 1,
+            //     child: Row(children: [RightSide()]))
+        ));
   }
 }
 
@@ -90,11 +91,11 @@ class RightSide extends StatelessWidget {
                   stops: [0.0, 1.0]),
             ),
             child: Column(children: [
-              WindowTitleBarBox(
-                  child: Row(children: [
-                    Expanded(child: MoveWindow()),
-                    WindowButtons()
-                  ])),
+              // WindowTitleBarBox(
+              //     child: Row(children: [
+              //       Expanded(child: MoveWindow()),
+              //       WindowButtons()
+              //     ])),
               SizedBox(height: 120),
               SizedBox(
                   width: 400,
@@ -120,35 +121,35 @@ class RightSide extends StatelessWidget {
                   style:
                   mat_dart.ButtonStyle(alignment: Alignment.bottomCenter),
                   onPressed: () {
-                    appWindow.hide();
+                    // appWindow.hide();
                   },
                   child: Text('Sign In'))
             ])));
   }
 }
 
-final buttonColors = WindowButtonColors(
-    iconNormal: Color(0xFF805306),
-    mouseOver: Color(0xFFF6A00C),
-    mouseDown: Color(0xFF805306),
-    iconMouseOver: Color(0xFF805306),
-    iconMouseDown: Color(0xFFFFD500));
-
-final closeButtonColors = WindowButtonColors(
-    mouseOver: Color(0xFFD32F2F),
-    mouseDown: Color(0xFFB71C1C),
-    iconNormal: Color(0xFF805306),
-    iconMouseOver: mat_dart.Colors.white);
-
-class WindowButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MinimizeWindowButton(colors: buttonColors),
-        MaximizeWindowButton(colors: buttonColors),
-        CloseWindowButton(colors: closeButtonColors),
-      ],
-    );
-  }
-}
+// final buttonColors = WindowButtonColors(
+//     iconNormal: Color(0xFF805306),
+//     mouseOver: Color(0xFFF6A00C),
+//     mouseDown: Color(0xFF805306),
+//     iconMouseOver: Color(0xFF805306),
+//     iconMouseDown: Color(0xFFFFD500));
+//
+// final closeButtonColors = WindowButtonColors(
+//     mouseOver: Color(0xFFD32F2F),
+//     mouseDown: Color(0xFFB71C1C),
+//     iconNormal: Color(0xFF805306),
+//     iconMouseOver: mat_dart.Colors.white);
+//
+// class WindowButtons extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       children: [
+//         MinimizeWindowButton(colors: buttonColors),
+//         MaximizeWindowButton(colors: buttonColors),
+//         CloseWindowButton(colors: closeButtonColors),
+//       ],
+//     );
+//   }
+// }
