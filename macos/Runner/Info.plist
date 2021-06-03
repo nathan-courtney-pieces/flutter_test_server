@@ -30,8 +30,6 @@
 	<string>MainMenu</string>
 	<key>LSUIElement</key>
 	<false/>
-	<key>SUPublicEDKey</key>
-	<string>6G0GK6Js1ZIF/WDI9bfVCEog7jjR5Pg5qVY+l820pfU=</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
